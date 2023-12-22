@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
+      - name: Copy Docker Compose file
+        run: scp docker-compose.yml ec2-user@ec2-51-20-94-151.eu-north-1.compute.amazonaws.com:/
       - name: Install Docker Compose
         run: |
           sudo apt-get update
