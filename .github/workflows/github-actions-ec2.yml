@@ -28,5 +28,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y docker-compose
+      - name: Pull Docker images
+        run: docker-compose pull
       - name: Deploy using Docker Compose
         run: docker-compose up -d
