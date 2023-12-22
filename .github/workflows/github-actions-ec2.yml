@@ -22,12 +22,7 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+     
       - name: Pull Docker images
         run: docker-compose pull
       - name: Deploy using Docker Compose
