@@ -15,6 +15,7 @@ pids
 *.pid
 *.seed
 *.pid.lock
+bionamic-api-key.pem
 
 # IntelliJ file
 .idea
