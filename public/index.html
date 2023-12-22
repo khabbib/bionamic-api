@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bionamic</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://bionamic.io/wp-content/uploads/2023/04/Favicon_negative_Blue_260x260px.svg" sizes="32x32">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <img src="https://bionamic.io/wp-content/uploads/2023/04/Logo_inverted-1.svg" alt="bionamic logo">
+    </nav>
+    <main>
+        <section class="apikey-section">
+
+            <h2>Generate API Key</h2>
+            <select id="permissionLevel">
+                <option value="admin">Admin</option>
+                <option value="read/write">Read/Write</option>
+                <option value="read">Read</option>
+            </select>
+            <button id="generateApiKey">Generate API Key</button>
+            <div id="apiKeyDisplay"></div>
+            <button id="copyToClipboard">Copy to Clipboard</button>
+            <script>
+                document.getElementById('generateApiKey').addEventListener('click', async () => {
+                    const permission = document.getElementById('permissionLevel').value;
+                    try {
+                        const response = await fetch('https://localhost/api/generate-api-key/1', {
+                            method: 'POST',
+                        });
+                        const data = await response.json();
+                        if (response.ok) {
+                            document.getElementById('apiKeyDisplay').textContent = `Your API Key: ${data.apiKey}`;
+                        } else {
+                            alert('Error generating API key: ' + data.error);
+                        }
+                    } catch (error) {
+                        alert('Network error: ' + error.message);
+                    }
+                });
+                </script>
+    </section>
+        
+        <section class="adjustment-section">
+            <h4>Adjust Value</h4>
+            <form>
+                Adjust by: <input type="number" id="adjustmentInput" value="0">
+                <button id="increment" type="button">+</button>
+                <button id="decrement" type="button">-</button>
+            </form>
+        </section>
+
+        <section class="dropdown-section">
+            <form>
+                <h4>Repository</h4>
+                <select id="repositoryDropdown"></select>
+                <h4>User</h4>
+                <select id="userDropdown"></select>
+            </form>
+        </section>
+
+        <section class="repository-section">
+            <h1>Repository</h1>
+            <table id="repositoriesTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="table-footer">
+                <span id="currentPage">1-10</span> <span id="totalPages"></span>
+                <button class="button-nav" id="loadPreviousButton">← Previous</button>
+                <button class="button-nav" id="loadMoreButton">Next →</button>
+            </div>
+        </section>
+
+        <section class="user-section">
+            <h1>User</h1>
+            <table id="repositoriesTableUser">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Permission</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="user-buttons">
+                <button class="button-nav" id="previousUsersButton">Previous 10</button>
+                <button class="button-nav" id="nextUsersButton">Next 10</button>
+            </div>
+        </section>
+
+        <section class="events-section">
+            <h1>Events</h1>
+            <table id="eventTable"></table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Permission</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </section>
+
+        <section class="matrix-section">
+            <h1>Matrix</h1>
+            <table id="tableMatrix"></table>
+        </section>
+        <section class="apikey-section">
+            <h1>API Keys</h1>
+            <table id="apiKeyTable">
+                <thead>
+                    <tr>
+                        <th>API ID</th>
+                        <th>Key</th>
+                        <th>Permission Level</th>
+                        <th>Expires</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+            </main>
+    <div id="toast"></div>
+    <script type="module" src="./app.js"></script>
+    <script src="util.js"></script>
+</body>
+</html>

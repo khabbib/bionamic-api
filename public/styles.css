@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Lato", sans-serif;
+  }
+  
+  body,
+  h1,
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav {
+    background-color: #2a2896;
+    width: 100%;
+    padding: 32px 100px;
+  }
+  
+  main {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h2 {
+    margin: 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 45%;
+    margin-right: 2%;
+  }
+  
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+  
+  th,
+  td {
+    padding: 8px 12px;
+    text-align: left;
+  }
+  
+  .button-nav {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    background-color: #2a2896;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button-nav:hover {
+    background-color: #0b0b2f;
+  }
+  
+  input,
+  select {
+    margin: 10px;
+    width: 200px;
+  }
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    background-color: #2a2896;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  #fetchButton {
+    padding: 7px 10px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #fetchButton:hover {
+    background-color: #218838;
+  }
+  
+  #paginationInfo {
+    margin: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    flex: 1;
+  }
+  
+  #toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    font-size: 17px;
+    transition: visibility 0.5s, opacity 0.5s linear;
+    opacity: 0;
+  }
+  
+  #toast.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    main {
+      flex-direction: column;
+    }
+  }
+  
+  .repositoryTable {
+    margin: 20px;
+  }
+  .repositoryTableUser {
+    float: left;
+    margin: 20px;
+  }
+
+
+.user_btns {
+  margin: 1rem 0;
+}
+
+section {
+  padding:20px;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+	<meta name="viewport" content
+		="width=device-width, initial-scale=1.0"> 
+	<title>HTTPS Server</title> 
+</head> 
+
+<style>
+	* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #1abc9c;
+}
+
+.container {
+  width: 33%;
+  height: 100%;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  padding: 5%;
+}
+
+#message {
+  width: 66%;
+  height: 48px;
+  border: none;
+  padding: 0 10px;
+}
+
+#submit {
+  width: 32%;
+  height: 48px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#submit:hover {
+  background: #eeeeee;
+
+}
+
+#output {
+  margin-top: 10px;
+  font-size: 2em;
+  color: #333333;
+}
+
+#more, #title {
+  width: 33%;
+  margin: 0 auto;
+  font-size: 1.5em;
+  color: #333333;
+}
+
+#title {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 3em;
+}
+
+@media screen and (max-width: 900px) {
+  
+  body {
+    padding: 15px;
+  }
+  .container, #title, #more {
+    width: 66%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  
+  body {
+    padding: 15px;
+  }
+  .container, #title, #more {
+    width: 100%;
+  }
+}
+</style>
+
+<body> 
+	<h1 id="title">Welcome to HTTPS Server</h1>
+<div class="container">
+<p>Send a POST request to the HTTPS server</p>
+  <input id="message" type="text" placeholder="message"></input>
+  <button id="submit">Test</button>
+  <p id="result"></p>
+</body> 
+
+
+<script>
+	async function postRequest(message){
+		const clientMessage = {
+			from: 'client',
+			message,
+		}
+		const post = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(clientMessage)
+		}
+		fetch('https://localhost:3000/crt', post).then((data) => {
+			console.log("status", data)
+			if(!data.ok) {
+				document.getElementById("result").innerHTML = `Failed to connect to the server. Status: ${data.status} `;
+			} else {
+				console.log("json fetch")
+				return data.json();
+			}
+		}).then((item) => {
+			document.getElementById("result").innerHTML = `Successful POST request. Response: <br> ${item.response}`;
+		}).catch((error) => {
+			document.getElementById("result").innerHTML = `Failed to connect to the server. Error: ${error} `;
+		});
+	}
+
+	document.getElementById("submit").addEventListener("click", (e) => {
+		const message = document.getElementById("message").value;
+		postRequest(message)
+	})
+</script>
+
+</html>
+
